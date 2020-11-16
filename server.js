@@ -1,11 +1,21 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-app.use(express.json());
 const bodyParser = require('body-parser');
+const { use } = require('./ROUTES/user.js');
+const path = require('path');
 require('./CONFIG/cfg.js');
 app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(express.json());
+
+
+
 app.use(bodyParser.json());
+
+//HABILITAR PUBLIC
+app.use(express.static(path.resolve(__dirname, './PUBLIC')));
+//console.log(__dirname + '../PUBLIC');
+//console.log(path.resolve(__dirname, '../PUBLIC'));
 
 
 app.use(require('./ROUTES/index.js'));
